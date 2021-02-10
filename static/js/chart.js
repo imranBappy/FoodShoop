@@ -1,32 +1,24 @@
-const AddToCart = document.querySelectorAll('#cart')
-const cartPrice = document.getElementById('price')
-const cartItem = document.getElementById('item')
-// ctrl + alt + shift + h
-
-let allPrice = 0
-const food = []
-
-AddToCart.forEach(function (element) {
-
-    element.addEventListener('click', () => {
-
-        let price = Number(element.dataset.price)
-        let foodId = element.dataset.id
-        let name = element.dataset.name;
-        food.push(foodId)
-        allPrice += price
-        // console.log(name);
-        cartPrice.innerText = allPrice
-        cartItem.innerText = food.length
-
-
-
-        let foodPrice = localStorage.setItem(foodId, `price`,)
-        let FoodName = localStorage.setItem(name, name,)
-
-        console.log();
-    })
+var addToCat = document.querySelectorAll("#cartadd");
+var idcatcher = document.getElementById('contaty');
+var allprice = 0;
+var foodname = []
+var contaty = 0;
+addToCat.forEach((idpicer) => {
+    idpicer.addEventListener('click', () => {
+        foodname.push(idpicer.dataset.name);
+        allprice += Number(idpicer.dataset.price);
+        contaty += 1;
+        const quantity = setItems(contaty, foodname, allprice);
+        idcatcher.innerHTML = quantity;
+        console.log(quantity);
+    });
 })
 
+function setItems(item1, item2, item3) {
+    const allItems = JSON.stringify({ quantity: item1, name: item2, price: item3 });
+    localStorage.setItem('cart', allItems);
+    let items = localStorage.getItem('cart')
+    return JSON.parse(items).quantity
+}
 
-// console.log(id);
+idcatcher.innerText = JSON.parse(localStorage.getItem('cart')).quantity;
